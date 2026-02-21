@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
+  const [loadingIdx, setLoadingIdx] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost:8000/api/recipes')
@@ -11,23 +12,20 @@ function App() {
       .catch(err => console.error('Error fetching recipes:', err));
   }, []);
 
-  const handleSelect = (recipeName) => {
+  const handleSelect = (idx, recipeName) => {
+    setLoadingIdx(idx);
     fetch('http://localhost:8000/api/select_recipe', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_name: 'md',
-        recipe_name: recipeName
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_name: 'md', recipe_name: recipeName })
     })
       .then(res => res.json())
-      .then(data => {
-        console.log('Success:', data);
-        alert(`You've selected recipe: ${recipeName}`);
+      .then(suggested => {
+        // Replace only the tile at position idx, keep all others
+        setRecipes(prev => prev.map((r, i) => i === idx ? suggested : r));
       })
-      .catch(err => console.error('Error selecting recipe:', err));
+      .catch(err => console.error('Error selecting recipe:', err))
+      .finally(() => setLoadingIdx(null));
   };
 
   return (
@@ -67,17 +65,24 @@ function App() {
       {/* Main Content */}
       <main className="main-content">
         <div className="restaurant-grid">
-          {recipes.map((recipe) => (
-            <div key={recipe.recipe_id} className="restaurant-card">
+          {recipes.map((recipe, idx) => (
+            <div key={idx} className={`restaurant-card ${loadingIdx === idx ? 'card-loading' : ''}`}>
               <div className="card-image-wrapper">
                 <img src={recipe.url} alt={recipe.recipe_name} className="card-image" />
                 <div className="hover-overlay">
-                  <button
-                    className="select-btn"
-                    onClick={() => handleSelect(recipe.recipe_name)}
-                  >
-                    Select
-                  </button>
+                  {loadingIdx === idx ? (
+                    <div className="spinner-wrap">
+                      <div className="spinner" />
+                      <span>Finding recipe…</span>
+                    </div>
+                  ) : (
+                    <button
+                      className="select-btn"
+                      onClick={() => handleSelect(idx, recipe.recipe_name)}
+                    >
+                      Select
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="card-content">

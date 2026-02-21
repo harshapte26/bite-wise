@@ -3,7 +3,7 @@ description: |
   An AI agent that generates a new, creative recipe name based on a list of
   existing recipe names and nutritional information provided as context.
 
-model: gemini-2.0-flash
+model: gemini-2.5-flash
 
 # ─── Root Agent System Instruction ────────────────────────────────────────────
 # NOTE: {existing_recipes} and {nutrition_info} are template placeholders —

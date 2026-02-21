@@ -4,8 +4,18 @@
         "recipe_names": [
             "Marcus Samuelsson Fried Chicken",
             "Hudson Breakfast Bagel",
-            "Detroit Brick Pizza"
-        ]
+            "Detroit Brick Pizza",
+            "Royal Greens Salad Bowl",
+            "SriPraPhai Thai Special",
+            "Mihir's Special",
+            "fake"
+        ],
+        "nutrition_info": {
+            "calories": 2000,
+            "protein": 100,
+            "carbs": 200,
+            "fat": 100
+        }
     },
     {
         "user_name": "guest",
@@ -15,6 +25,12 @@
             "Mihir's Special",
             "Michigan Olive Burger",
             "Paneer Tikka Masala"
-        ]
+        ],
+        "nutrition_info": {
+            "calories": 2000,
+            "protein": 100,
+            "carbs": 200,
+            "fat": 100
+        }
     }
 ]
