@@ -20,6 +20,7 @@ instruction: |
     8. Summarize the findings in your final response:
        - Cite the total aggregated values.
        - Confirm that the chart has been generated.
-       - Provide personalized, empathetic advice and suggest "Maybe you should add [Ingredient] to cover for your [Nutrient] deficiency".
+       - Provide personalized, empathetic advice.
+       - Populate the 'suggestions' field with a list of specific ingredients to add (e.g., ["chia seeds", "spinach"]).
 
   Respond ONLY with a valid JSON object matching the output schema. No extra text.

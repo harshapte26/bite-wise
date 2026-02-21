@@ -13,6 +13,7 @@ class NutritionOutput(BaseModel):
     summary: str = Field(description="A brief summary of the aggregated nutritional information.")
     total_nutrients: Dict[str, str] = Field(description="The total aggregated values for each nutrient.")
     chart_path: str = Field(description="The file path where the nutrition bar plot is saved.")
+    suggestions: List[str] = Field(description="A list of ingredient suggestions to cover nutritional deficiencies.")
 
 # ─── Tool: Calculate and Plot Nutrients ────────────────────────────────────────
 # ─── Tool 1: Get User Selected Recipes ────────────────────────────────────────
