@@ -23,6 +23,12 @@ npm install
 
 This frontend relies on a backend running concurrently on `http://localhost:8000` to feed it data. Ensure the Python backend is running.
 
+To start the backend, open a new terminal, navigate to the `backend` directory, and run:
+```bash
+cd ../backend
+uv run uvicorn frontend_hoster:app --reload
+```
+
 **The frontend connects to the following backend endpoints:**
 
 - `GET http://localhost:8000/api/recipes`
