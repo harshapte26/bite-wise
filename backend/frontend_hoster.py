@@ -25,20 +25,20 @@ def get_nutrition_summary(user_name: str = "md"):
     # This would eventually call the NutritionAnalysisAgent.
     # For now, returning mock data that matches the output schema.
     return {
-        "summary": "Your current meal plan is rich in protein but slightly low in fiber. Great for muscle building, but consider adding more greens.",
+        "summary": "Your plan is slightly high in sodium and low in certain micronutrients. To optimize your health, consider the following targeted adjustments.",
         "total_nutrients": {
-            "calories": "2450 kcal",
-            "proteinContent": "125 g",
-            "carbsContent": "210 g",
-            "fatContent": "85 g",
-            "fiberContent": "12 g",
-            "sodiumContent": "2100 mg"
+            "Calories": "2,450 kcal",
+            "Protein": "125 g",
+            "Carbs": "210 g",
+            "Fat": "85 g",
+            "Fiber": "12 g",
+            "Sodium": "2,100 mg"
         },
         "chart_path": "agents/nutrition_analysis/nutrition_chart.png",
         "suggestions": [
-            "Add 1 cup of spinach to your breakfast bagel for vitamin K and iron.",
-            "Sprinkle 2 tablespoons of chia seeds onto your pizza for a fiber boost.",
-            "Swap one rice portion for quinoa to increase your magnesium intake."
+            "Add spinach or kale to your breakfast bagel to boost Vitamin K and Iron.",
+            "Mix in chia seeds or flax seeds with your pizza toppings for extra Fiber.",
+            "Incorporate a side of greek yogurt to increase Protein and Probiotics."
         ]
     }
 
