@@ -1,15 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import NutritionDashboard from './components/NutritionDashboard';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [loadingIdx, setLoadingIdx] = useState(null);
+  const [nutritionData, setNutritionData] = useState(null);
+
+  const fetchNutrition = () => {
+    fetch('http://localhost:8000/api/nutrition_summary?user_name=md')
+      .then(res => res.json())
+      .then(data => setNutritionData(data))
+      .catch(err => console.error('Error fetching nutrition:', err));
+  };
 
   useEffect(() => {
     fetch('http://localhost:8000/api/recipes')
       .then(res => res.json())
       .then(data => setRecipes(data))
       .catch(err => console.error('Error fetching recipes:', err));
+
+    fetchNutrition();
   }, []);
 
   const handleSelect = (idx, recipeName) => {
@@ -23,6 +34,7 @@ function App() {
       .then(suggested => {
         // Replace only the tile at position idx, keep all others
         setRecipes(prev => prev.map((r, i) => i === idx ? suggested : r));
+        fetchNutrition(); // Refresh nutrition whenever a recipe is selected
       })
       .catch(err => console.error('Error selecting recipe:', err))
       .finally(() => setLoadingIdx(null));
@@ -91,6 +103,8 @@ function App() {
             </div>
           ))}
         </div>
+
+        {nutritionData && <NutritionDashboard data={nutritionData} />}
       </main>
     </div>
   );
