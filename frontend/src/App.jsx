@@ -11,21 +11,21 @@ function App() {
       .catch(err => console.error('Error fetching recipes:', err));
   }, []);
 
-  const handleSelect = (recipeId) => {
+  const handleSelect = (recipeName) => {
     fetch('http://localhost:8000/api/select_recipe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        user_id: '1337',
-        recipe_id: recipeId
+        user_name: 'md',
+        recipe_name: recipeName
       })
     })
       .then(res => res.json())
       .then(data => {
         console.log('Success:', data);
-        alert(`You've selected recipe ID: ${recipeId}`);
+        alert(`You've selected recipe: ${recipeName}`);
       })
       .catch(err => console.error('Error selecting recipe:', err));
   };
@@ -74,7 +74,7 @@ function App() {
                 <div className="hover-overlay">
                   <button
                     className="select-btn"
-                    onClick={() => handleSelect(recipe.recipe_id)}
+                    onClick={() => handleSelect(recipe.recipe_name)}
                   >
                     Select
                   </button>
