@@ -103,7 +103,7 @@ async def scrape_recipe(recipe_name: str) -> dict:
 
     return None
 
-def run(user_name: str, recipe_name: str) -> Dict:
+async def run(user_name: str, recipe_name: str) -> Dict:
     # 1. Save the selected recipe
     add_saved_recipe(user_name, recipe_name)
 
@@ -111,10 +111,10 @@ def run(user_name: str, recipe_name: str) -> Dict:
     user = get_user(user_name)
 
     # 3. Ask agent for next suggestion
-    recipe_name_obj = asyncio.run(suggest_recipe(
+    recipe_name_obj = await suggest_recipe(
         existing_recipes=user.get("recipe_names", []),
         nutrition_info=user.get("nutrition_info", {}),
-    ))
+    )
     # Load as json object 
     try:
         recipe_name_obj = json.loads(recipe_name_obj)
@@ -129,17 +129,22 @@ def run(user_name: str, recipe_name: str) -> Dict:
         }
         
     # 4. Call for New Recipe getter & attribute generator
-    scraped_recipe_details = asyncio.run(scrape_recipe(suggested_recipe_name))
-    
+    scraped_recipe_details = await scrape_recipe(suggested_recipe_name)
+    print(scraped_recipe_details)
+    print("------")
     # 5. Save the scraped recipe details
     add_saved_recipe(user_name, scraped_recipe_details)
     
     # 
     result = {
     "recipe_name": suggested_recipe_name,
-    "url": scraped_recipe_details.get("source_url"),
-    "status": "success"
-    }
+    "url": scraped_recipe_details.get("image_url") ,
+    "status": "success",
+    "nutrients": scraped_recipe_details.get("nutrients"),
+    "ingredients": scraped_recipe_details.get("ingredients"),  
+}
     return result
-# Run the function
-print(run("md", "Spaghetti Carbonara"))
+
+if __name__ == "__main__":
+    # Run the function locally
+    print(asyncio.run(run("md", "Spaghetti Carbonara")))

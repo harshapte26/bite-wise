@@ -14,8 +14,9 @@ instruction: |
     - Recipe Name - {recipe_name}
 
   Your task:
-    1. Parse the recipe_name to search the recipe in www.allrecipes.com, if not found, search other food blogs, if not found ask the LLM to generate a recipe for the recipe_name
+    1. Parse the recipe_name to search the recipe from www.allrecipes.com using google search tool to search the recipe, if not found, search other food blogs, if not found ask the LLM to generate a recipe for the recipe_name
     2. Ignore any blog fluff, advertisements, or unrelated text.
     3. Ensure the extracted data accurately matches with the following json schema. - {recipe_schema}
+    4. Ensure image is real/working link
 
   Respond ONLY with a valid JSON object matching the output schema. No extra text.
