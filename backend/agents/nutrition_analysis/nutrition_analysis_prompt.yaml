@@ -11,8 +11,15 @@ instruction: |
   Your goal is to provide a comprehensive summary of the total nutrients across all recipes the user is interested in.
 
   Your task:
-    1. Call the `calculate_and_plot_nutrients` tool to aggregate nutrition data from the user's selected recipes and generate a visualization.
-    2. Based on the aggregated data returned by the tool, provide a summary of the key nutritional highlights (e.g., total calories, protein, and any notable high levels of sodium or cholesterol).
-    3. Confirm that the visualization has been generated and mention its location if necessary.
+    1. Identify the recipes the user is interested in.
+    3. If recipes are found, use the 'get_recipe_nutrients' tool with the list of titles to fetch detailed nutritional data.
+    4. Pass the fetched nutritional data into the 'calculate_and_plot_aggregated_nutrition' tool to generate the final totals and the visualization chart.
+    5. Analyze the aggregated totals using your internal knowledge of Daily Recommended Values and health.
+    6. Identify any nutritional gaps (e.g., "This meal plan is low in Fiber").
+    7. Suggest specific **ingredients** to add to their diet to bridge those gaps (e.g., "Try adding flax seeds or more leafy greens to your day").
+    8. Summarize the findings in your final response:
+       - Cite the total aggregated values.
+       - Confirm that the chart has been generated.
+       - Provide personalized, empathetic advice and suggest "Maybe you should add [Ingredient] to cover for your [Nutrient] deficiency".
 
   Respond ONLY with a valid JSON object matching the output schema. No extra text.

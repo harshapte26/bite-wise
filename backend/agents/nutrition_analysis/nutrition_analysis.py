@@ -125,6 +125,7 @@ def calculate_and_plot_aggregated_nutrition(recipe_nutrients: List[Dict]) -> str
     except Exception as e:
         return f"Error during nutritional analysis: {str(e)}"
 
+# ─── Tool 4: Recommend Nutritional Additions ──────────────────────────────────
 # ─── Load prompt config from YAML ─────────────────────────────────────────────
 _PROMPT_FILE = os.path.join(os.path.dirname(__file__), "nutrition_analysis_prompt.yaml")
 
@@ -139,7 +140,11 @@ nutrition_analysis_agent = Agent(
     model=MODEL,
     description=_config["description"],
     instruction=_config["instruction"],
-    tools=[get_user_selected_recipes, get_recipe_nutrients, calculate_and_plot_aggregated_nutrition],
+    tools=[
+        get_user_selected_recipes, 
+        get_recipe_nutrients, 
+        calculate_and_plot_aggregated_nutrition
+    ],
     output_schema=NutritionOutput,
     output_key="nutrition_summary",
 )
@@ -159,7 +164,9 @@ if __name__ == "__main__":
         if nutrients:
             print(f"\n3. Aggregating and plotting...")
             tool_result = calculate_and_plot_aggregated_nutrition(nutrients)
-            print(f"   Result: {tool_result}")
+            result_json = json.loads(tool_result)
+            print(f"   Aggregated Totals: {result_json.get('totals')}")
+            print("\nVerification complete. The agent will now use its LLM reasoning to suggest additions based on these totals.")
     
     # We can't easily run the full agent without session state/mocks here, 
     # but we can verify the instantiation.
