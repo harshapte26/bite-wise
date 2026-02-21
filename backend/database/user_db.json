@@ -6,7 +6,9 @@
             "Hudson Breakfast Bagel",
             "Detroit Brick Pizza",
             "Royal Greens Salad Bowl",
-            "SriPraPhai Thai Special"
+            "SriPraPhai Thai Special",
+            "Mihir's Special",
+            "fake"
         ],
         "nutrition_info": {
             "calories": 2000,

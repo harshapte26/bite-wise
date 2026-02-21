@@ -1,24 +1,29 @@
 #!/bin/bash
 
-# Define cleanup function to kill background processes on exit
-cleanup() {
-    echo "Stopping servers..."
-    kill 0
-    exit
-}
+# ── Absolute paths ─────────────────────────────────────────────────────────────
+ROOT="$(cd "$(dirname "$0")" && pwd)"
 
-# Trap termination signals to run the cleanup function
+# ── Kill all background processes on Ctrl+C ────────────────────────────────────
+cleanup() {
+    echo ""
+    echo "🛑  Stopping servers..."
+    kill 0
+    exit 0
+}
 trap cleanup SIGINT SIGTERM
 
-echo "Starting Backend (FastAPI)..."
-cd backend
-uv run uvicorn frontend_hoster:app --reload &
-cd ..
+# ── Backend: FastAPI on :8000 ──────────────────────────────────────────────────
+echo "🚀  Starting Backend  → http://localhost:8000"
+cd "$ROOT/backend" && uv run uvicorn frontend_hoster:app --reload --port 8000 &
 
-echo "Starting Frontend (React/Vite)..."
-cd frontend
-npm run dev &
-cd ..
+# ── Frontend: Vite on :5173 ────────────────────────────────────────────────────
+echo "🚀  Starting Frontend → http://localhost:5173"
+cd "$ROOT/frontend" && npm run dev --port 5173 &
 
-echo "Both servers are running! Press Ctrl+C to stop them both."
+# ── Done ───────────────────────────────────────────────────────────────────────
+echo ""
+echo "✅  Both servers running. Press Ctrl+C to stop."
+echo "   Frontend → http://localhost:5173"
+echo "   Backend  → http://localhost:8000"
+echo ""
 wait

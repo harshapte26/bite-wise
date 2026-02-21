@@ -67,7 +67,4 @@ def run(user_name: str, recipe_name: str) -> Dict:
     # 4. Call for  New Recipe getter & attribute generator: 
     ## Place holder for now & change return object 
     # TODO: @savani 
-    return {
-        "status": "success",
-        "suggested_recipe": recipe_name,
-    } 
+    return recipe_name

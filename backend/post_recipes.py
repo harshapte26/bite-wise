@@ -12,10 +12,9 @@ class RecipeSelection(BaseModel):
 @router.post("/api/select_recipe")
 def select_recipe(selection: RecipeSelection):
 
-    # result = run(selection.user_name, selection.recipe_name)
+    recipe_name = run(selection.user_name, selection.recipe_name)
     result = {
-        "recipe_name": "Mihir's Special",
+        "recipe_name": recipe_name,
         "url": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800"
     }
-    time.sleep(3)
     return result
