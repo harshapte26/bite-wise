@@ -1,0 +1,64 @@
+type: object
+properties:
+  title:
+    type: string
+    description: The name of the recipe
+  nutrients:
+    type: object
+    properties:
+      calories:
+        type: string
+      carbohydrateContent:
+        type: string
+      cholesterolContent:
+        type: string
+      fiberContent:
+        type: string
+      proteinContent:
+        type: string
+      saturatedFatContent:
+        type: string
+      sodiumContent:
+        type: string
+      sugarContent:
+        type: string
+      fatContent:
+        type: string
+      unsaturatedFatContent:
+        type: string
+  ingredients:
+    type: array
+    items:
+      type: string
+    description: List of ingredients
+  directions:
+    type: string
+    description: Instructions for preparing the recipe
+  image_name:
+    type: string
+    description: Local image filename
+  cloud_image_url:
+    type: string
+    format: uri
+    description: URL of the image hosted in the cloud
+  metadata:
+    type: object
+    properties:
+      source_url:
+        type: string
+        format: uri
+        description: Original URL from where the recipe was scraped
+      total_time:
+        type: integer
+        description: Total time to prepare recipe in minutes
+      yields:
+        type: string
+        description: Number of servings
+required:
+  - title
+  - nutrients
+  - ingredients
+  - directions
+  - image_name
+  - cloud_image_url
+  - metadata
