@@ -16,36 +16,37 @@ def save_db(data):
     with open(DB_FILE, 'w') as f:
         json.dump(data, f, indent=4)
 
-def get_user(user_id):
+def get_user(user_name):
     db = load_db()
     for user in db:
-        if user["user_id"] == str(user_id):
+        if user.get("user_name") == str(user_name):
             return user
     return None
 
 def get_all_users():
     return load_db()
 
-def add_saved_recipe(user_id, recipe_id):
+def add_saved_recipe(user_name, recipe_name):
     db = load_db()
-    user_id_str = str(user_id)
+    user_name_str = str(user_name)
     
-    user = next((u for u in db if u["user_id"] == user_id_str), None)
+    user = next((u for u in db if u.get("user_name") == user_name_str), None)
     if not user:
-        user = {"user_id": user_id_str, "recipe_ids": []}
+        user = {"user_name": user_name_str, "recipe_names": []}
         db.append(user)
         
-    user["recipe_ids"].append(recipe_id)
+    if recipe_name not in user["recipe_names"]:
+        user["recipe_names"].append(recipe_name)
     save_db(db)
     return True
 
-def remove_saved_recipe(user_id, recipe_id):
+def remove_saved_recipe(user_name, recipe_name):
     db = load_db()
-    user_id_str = str(user_id)
+    user_name_str = str(user_name)
     
-    user = next((u for u in db if u["user_id"] == user_id_str), None)
-    if user and recipe_id in user["recipe_ids"]:
-        user["recipe_ids"].remove(recipe_id) # Removes first occurrence 
+    user = next((u for u in db if u.get("user_name") == user_name_str), None)
+    if user and recipe_name in user["recipe_names"]:
+        user["recipe_names"].remove(recipe_name) # Removes first occurrence 
         save_db(db)
         return True
         

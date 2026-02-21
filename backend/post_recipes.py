@@ -6,16 +6,16 @@ from database.db import add_saved_recipe
 router = APIRouter()
 
 class RecipeSelection(BaseModel):
-    user_id: str
-    recipe_id: int
+    user_name: str
+    recipe_name: str
 
 @router.post("/api/select_recipe")
 def select_recipe(selection: RecipeSelection):
-    success = add_saved_recipe(selection.user_id, selection.recipe_id)
+    success = add_saved_recipe(selection.user_name, selection.recipe_name)
     if success:
-        return {"status": "success", "message": f"Recipe {selection.recipe_id} selected and saved."}
+        return {"status": "success", "message": f"Recipe {selection.recipe_name} selected and saved."}
     else:
-        return {"status": "success", "message": f"Recipe {selection.recipe_id} was already selected or error occurred."}
+        return {"status": "success", "message": f"Recipe {selection.recipe_name} was already selected or error occurred."}
 
 if __name__ == "__main__":
     from fastapi.middleware.cors import CORSMiddleware

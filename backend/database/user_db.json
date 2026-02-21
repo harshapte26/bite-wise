@@ -1,32 +1,18 @@
 [
     {
-        "user_id": "1337",
-        "recipe_ids": [
-            1,
-            3,
-            5,
-            7,
-            9,
-            11,
-            13,
-            15,
-            17,
-            19
+        "user_name": "md",
+        "recipe_names": [
+            "Marcus Samuelsson Fried Chicken",
+            "Hudson Breakfast Bagel",
+            "Detroit Brick Pizza"
         ]
     },
     {
-        "user_id": "404",
-        "recipe_ids": [
-            2,
-            4,
-            6,
-            8,
-            10,
-            12,
-            14,
-            16,
-            18,
-            20
+        "user_name": "guest",
+        "recipe_names": [
+            "SriPraPhai Thai Special",
+            "Royal Greens Salad Bowl",
+            "Mihir's Special"
         ]
     }
 ]
