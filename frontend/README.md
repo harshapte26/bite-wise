@@ -35,4 +35,4 @@ uv run uvicorn frontend_hoster:app --reload
   - Fetches the list of all recipes with their `recipe_id`, `recipe_name`, and `url` to generate the card grid.
 
 - `POST http://localhost:8000/api/select_recipe`
-  - Sends a JSON payload containing the `user_id` and `recipe_id` when the user clicks the "Select" button on a specific recipe tile.
+  - Sends a JSON payload containing the `user_name` and `recipe_name` when the user clicks the "Select" button on a specific recipe tile.

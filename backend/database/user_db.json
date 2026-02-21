@@ -1,0 +1,18 @@
+[
+    {
+        "user_name": "md",
+        "recipe_names": [
+            "Marcus Samuelsson Fried Chicken",
+            "Hudson Breakfast Bagel",
+            "Detroit Brick Pizza"
+        ]
+    },
+    {
+        "user_name": "guest",
+        "recipe_names": [
+            "SriPraPhai Thai Special",
+            "Royal Greens Salad Bowl",
+            "Mihir's Special"
+        ]
+    }
+]
