@@ -5,7 +5,13 @@
             "Marcus Samuelsson Fried Chicken",
             "Hudson Breakfast Bagel",
             "Detroit Brick Pizza"
-        ]
+        ],
+        "nutrition_info": {
+            "calories": 2000,
+            "protein": 100,
+            "carbs": 200,
+            "fat": 100
+        }
     },
     {
         "user_name": "guest",
@@ -13,6 +19,12 @@
             "SriPraPhai Thai Special",
             "Royal Greens Salad Bowl",
             "Mihir's Special"
-        ]
+        ],
+        "nutrition_info": {
+            "calories": 2000,
+            "protein": 100,
+            "carbs": 200,
+            "fat": 100
+        }
     }
 ]
