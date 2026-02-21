@@ -6,6 +6,7 @@ from google.adk.sessions import InMemorySessionService
 from google.genai import types
 from agents.recipe_creator.recipe_creator import create_recipe_creator_agent
 from database.db import add_saved_recipe, get_user
+import json
 
 # ── Build agent once at module load ───────────────────────────────────────────
 with open("agents/recipe_creator/recipe_creator_prompt.yaml") as f:
@@ -55,10 +56,13 @@ def run(user_name: str, recipe_name: str) -> Dict:
     user = get_user(user_name)
 
     # 3. Ask agent for next suggestion
-    recipe_name = asyncio.run(suggest_recipe(
+    recipe_name_obj = asyncio.run(suggest_recipe(
         existing_recipes=user.get("recipe_names", []),
         nutrition_info=user.get("nutrition_info", {}),
     ))
+    # Load as json object 
+    recipe_name_obj = json.loads(recipe_name_obj)
+    recipe_name = recipe_name_obj.get("recipe_name")
     if recipe_name is None:
         return {
             "status": "error",
@@ -67,4 +71,5 @@ def run(user_name: str, recipe_name: str) -> Dict:
     # 4. Call for  New Recipe getter & attribute generator: 
     ## Place holder for now & change return object 
     # TODO: @savani 
+    
     return recipe_name
