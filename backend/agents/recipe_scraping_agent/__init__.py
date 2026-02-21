@@ -1,1 +1,1 @@
-from .recipe_scraping_agent import recipe_scraping_agent
+from .recipe_scraping_agent import create_recipe_scraping_agent, RecipeScrapedOutput

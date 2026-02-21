@@ -12,9 +12,5 @@ class RecipeSelection(BaseModel):
 @router.post("/api/select_recipe")
 def select_recipe(selection: RecipeSelection):
 
-    recipe_name = run(selection.user_name, selection.recipe_name)
-    result = {
-        "recipe_name": recipe_name,
-        "url": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800"
-    }
+    result = run(selection.user_name, selection.recipe_name)
     return result
