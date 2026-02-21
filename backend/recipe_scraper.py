@@ -40,7 +40,6 @@ def scrape_and_store_recipe(url):
         
         # # 4. Upload to Cloud
         cloud_image_url = upload_to_gcp(image_name, f"seed_recipes/{image_name}")
-        #cloud_image_url = "https://storage.googleapis.com/bitewise-recipe-images/recipes/spinach_and_feta_turkey_burgers.jpg"
         
         # 5. Prepare Metadata
         recipe_data = {
@@ -67,7 +66,7 @@ def scrape_and_store_recipe(url):
 
 def seed_recipes():
     # if seed_recipes.json exists, skip
-    if os.path.exists('recipe_db/seed_recipes.json'):
+    if os.path.exists('database/seed_recipes.json'):
         return
 
     urls = [
@@ -86,5 +85,5 @@ def seed_recipes():
             results.append(data)
     
     # Save to JSON
-    with open('recipe_db/seed_recipes.json', 'w') as f:
+    with open('database/seed_recipes.json', 'w') as f:
         json.dump(results, f, indent=4)
