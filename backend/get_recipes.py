@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from recipe_scraper import seed_recipes
 
 router = APIRouter()
 
@@ -37,4 +38,5 @@ MOCK_RECIPES = [
 
 @router.get("/api/recipes")
 def get_recipes():
+    seed_recipes()
     return MOCK_RECIPES
